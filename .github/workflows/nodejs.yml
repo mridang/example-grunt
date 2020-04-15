@@ -51,7 +51,7 @@ jobs:
         with:
           node-version: 13.x
 
-      - name: npm audit
+      - name: Run dependency audit
         run: npm audit
 
   outdated:
