@@ -50,4 +50,6 @@ jobs:
           node-version: 13.x
 
       - name: npm outdated
-        run: npm outdated
+        run: |
+          npm ci
+          npm outdated
