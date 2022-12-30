@@ -1,0 +1,4 @@
+{
+  "temp-dir": ".nyc",
+  "report-dir": "./build/coverage"
+}

@@ -1,77 +1,72 @@
 module.exports = function (grunt) {
   'use strict';
 
+  grunt.loadNpmTasks('grunt-jsdoc');
+  grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-eslint');
-  grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-exorcise');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-prettier');
-  grunt.loadNpmTasks('@mridang/grunt-lebab');
 
-  grunt.registerTask('default', ['clean', 'lebab', 'prettier', 'browserify', 'eslint', 'exorcise']);
-  grunt.registerTask('dev', ['clean', 'lebab', 'prettier', 'browserify', 'eslint', 'watch']);
-  grunt.registerTask('build', ['clean', 'lebab', 'prettier', 'browserify', 'eslint', 'exorcise']);
+  grunt.registerTask('default', ['clean', 'prettier', 'eslint', 'mochaTest']);
+  grunt.registerTask('dev', ['clean', 'prettier', 'eslint', 'watch']);
+  grunt.registerTask('build', ['clean', 'prettier', 'eslint']);
 
   grunt.initConfig({
     prettier: {
       files: {
-        src: ['src/**/*.js']
-      }
-    },
-    browserify: {
-      dist: {
-        options: {
-          transform: [
-            [
-              'babelify',
-            ],
-            [
-              'uglifyify', {
-                global: true,
-                sourceMap: true
-              }
-            ]
-          ],
-          browserifyOptions: {
-            debug: true
-          }
-        },
-        files: {
-          'dist/main.js': ['src/main.js'],
-        }
-      }
-    },
-    exorcise: {
-      bundle: {
-        options: {},
-        files: {
-          'dist/main.map': ['dist/main.js'],
-        }
+        src: [
+          'src/**/*.js',
+          'test/**/*.js'
+        ]
       }
     },
     eslint: {
       options: {
-        configFile: '.eslintrc',
+        overrideConfigFile: '.eslintrc',
         fix: true
       },
-      target: 'src/**/*.js'
+      target: [
+        'src/**/*.js',
+        'test/**/*.js',
+      ]
     },
     clean: [
       'dist'
     ],
     watch: {
       scripts: {
-        files: ['src/**/*.js'],
-        tasks: ['browserify', 'eslint']
+        files: [
+          'src/**/*.js',
+          'test/**/*.js'
+        ],
+        tasks: ['eslint']
       }
     },
-    lebab: {
-      options: {
-        progress: true
+    mochaTest: {
+      test: {
+        options: {
+          reporter: 'spec',
+          require: [
+            'test/bootstrap.js' // Example
+          ],
+          clearRequireCache: true
+        },
+        src: [
+          'test/**/*.test.js'
+        ]
       },
-      files: {
-        src: ['src/**/*.js']
+    },
+
+    jsdoc : {
+      dist : {
+        src: ['index.js', 'lib/**/*.js', 'README.md'],
+        jsdoc: './node_modules/grunt-jsdoc/node_modules/jsdoc/jsdoc',
+        options: {
+          destination: 'doc',
+          configure: './conf/jsdoc.conf.json',
+          template: './node_modules/grunt-jsdoc/node_modules/ink-docstrap/template'
+        }
       }
     }
   });
