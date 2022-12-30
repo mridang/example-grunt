@@ -18,14 +18,10 @@
     "@types/mocha": "^10.0.1",
     "chai": "^4.3.7",
     "eslint": "^8.30.0",
-    "eslint-config-airbnb": "^19.0.4",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-n": "^15.6.0",
     "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-react": "^7.31.11",
-    "eslint-plugin-react-hooks": "^4.6.0",
     "grunt": "^1.5.3",
     "grunt-cli": "^1.4.3",
     "grunt-contrib-clean": "^2.0.1",
@@ -41,7 +37,6 @@
   },
   "dependencies": {
     "@types/node": "^18.11.18",
-    "core-js": "^3.27.1",
     "npm-check-updates": "^16.6.2"
   }
 }
