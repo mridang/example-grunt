@@ -8,9 +8,13 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-prettier');
 
-  grunt.registerTask('default', ['clean', 'prettier', 'eslint', 'mochaTest']);
+  grunt.registerTask('default', ['clean', 'prettier', 'eslint', 'test']);
   grunt.registerTask('dev', ['clean', 'prettier', 'eslint', 'watch']);
   grunt.registerTask('build', ['clean', 'prettier', 'eslint']);
+  grunt.registerTask('doc', 'jsdoc');
+  grunt.registerTask('lint', ['prettier', 'eslint']);
+  grunt.registerTask('test', ['mochaTest']);
+  grunt.registerTask('release', ['lint', 'test', 'jsdoc']);
 
   // noinspection JSUnresolvedFunction
   grunt.initConfig({
@@ -61,12 +65,10 @@ module.exports = function (grunt) {
 
     jsdoc : {
       dist : {
-        src: ['index.js', 'lib/**/*.js', 'README.md'],
-        jsdoc: './node_modules/grunt-jsdoc/node_modules/jsdoc/jsdoc',
+        src: ['src/**/*.js', 'lib/**/*.js', 'README.md'],
         options: {
           destination: 'doc',
-          configure: './conf/jsdoc.conf.json',
-          template: './node_modules/grunt-jsdoc/node_modules/ink-docstrap/template'
+          configure: '.jsdocrc'
         }
       }
     }
