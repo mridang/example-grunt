@@ -1,4 +1,4 @@
-name: Node CI
+name: Grunt
 
 on: [push]
 
@@ -9,27 +9,18 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Cache node modules
-        uses: actions/cache@v1
-        env:
-          cache-name: cache-node-modules
+        uses: actions/checkout@v3
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+          fetch-depth: 0
 
       - name: Set up Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: 13.x
+          node-version: 18.x
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --loglevel=error --no-update-notifier --no-audit --no-fund
 
       - name: Build project
         run: npm run build --if-present
@@ -41,12 +32,15 @@ jobs:
     name: Audit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Set up Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: 13.x
+          node-version: 18.x
+          cache: 'npm'
 
       - name: Run dependency audit
         run: npm audit --production
@@ -55,15 +49,18 @@ jobs:
     name: Outdated
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Set up Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: 13.x
+          node-version: 18.x
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --loglevel=error --no-update-notifier --no-audit --no-fund
 
       - name: Check outdated dependencies
         run: npm outdated

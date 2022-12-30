@@ -1,0 +1,28 @@
+name: Mocha
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --loglevel=error --no-update-notifier --no-audit --no-fund
+
+      - name: 'Mocha Test'
+        run: mkdir -p ${{ runner.temp }}/mocha/results/ && npx mocha --reporter=xunit > ${{ runner.temp }}/mocha/results/mocha.xunit.xml
+
+      - uses: EnricoMi/publish-unit-test-result-action/composite@v2
+        if: always()
+        with:
+          xunit_files: ${{ runner.temp }}/mocha/results/mocha.xunit.xml
