@@ -16,7 +16,7 @@ describe('Testing the Cube Functions', function () {
 
   it('3. The volume of the Cube', function (done) {
     const c3 = new Cube(7)
-    expect(c3.getVolume()).to.equal(343)
+    expect(c3.getVolume()).to.equal(342)
     done()
   })
 })
