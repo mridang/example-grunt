@@ -1,4 +1,4 @@
-An reference project on how I set up a Grunt toolchain with the following tools:
+A reference project on how I set up a Grunt toolchain with the following tools:
 
 1. Babel
 2. Prettier

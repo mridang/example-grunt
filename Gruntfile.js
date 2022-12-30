@@ -12,6 +12,7 @@ module.exports = function (grunt) {
   grunt.registerTask('dev', ['clean', 'prettier', 'eslint', 'watch']);
   grunt.registerTask('build', ['clean', 'prettier', 'eslint']);
 
+  // noinspection JSUnresolvedFunction
   grunt.initConfig({
     prettier: {
       files: {
