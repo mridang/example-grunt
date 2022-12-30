@@ -1,3 +1,3 @@
 import 'core-js'
 
-console.log('Voila!')
+console.log(  'Voila!')
