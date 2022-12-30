@@ -20,7 +20,7 @@ jobs:
         run: npm ci --loglevel=error --no-update-notifier --no-audit --no-fund
 
       - name: 'Mocha Test'
-        run: mkdir -p {{ runner.temp }}/mocha/results/ && npx mocha --reporter=xunit > ${{ runner.temp }}/mocha/results/mocha.xunit.xml
+        run: mkdir -p ${{ runner.temp }}/mocha/results/ && npx mocha --reporter=xunit > ${{ runner.temp }}/mocha/results/mocha.xunit.xml
 
       - uses: EnricoMi/publish-unit-test-result-action/composite@v2
         if: always()

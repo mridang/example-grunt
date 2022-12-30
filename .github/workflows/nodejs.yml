@@ -1,4 +1,4 @@
-name: Node
+name: Grunt
 
 on: [push]
 
