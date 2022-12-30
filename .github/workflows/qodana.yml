@@ -10,6 +10,15 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --loglevel=error --no-update-notifier --no-audit --no-fund
+
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v2022.3.0
         with:
