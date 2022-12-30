@@ -1,8 +1,5 @@
 {
   "extends": "standard",
-  "parserOptions": {
-    "sourceType": "module"
-  },
   "env": {
     "node": true,
     "mocha": true
