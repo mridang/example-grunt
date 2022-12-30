@@ -7,6 +7,12 @@ An reference project on how I set up a Grunt toolchain with the following tools:
 5. Lebab
 
 
+# Auditing
+
+``
+npm audit fix
+``
+
 # Testing
 
 ```
