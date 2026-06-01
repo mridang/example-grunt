@@ -21,6 +21,9 @@ jobs:
   dependency-review:
     runs-on: ubuntu-latest
     steps:
+      - name: Runner Common Setup
+        uses: mridang/action-runner-common@v1
+
       - name: 'Checkout Repository'
         uses: actions/checkout@v3
 
